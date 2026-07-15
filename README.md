@@ -117,6 +117,6 @@ Under the following terms:
 
 [Contact information or support channels]
 
-- **Author**: [Your Name]
-- **Email**: [contact-email]
+- **Author**: [Sainsbury Wellcome Centre FabLabs](https://www.sainsburywellcome.org/content/fablab)
+- **Email**: [swc.fablabs@ucl.ac.uk](mailto:swc.fablabs@ucl.ac.uk)
 - **Website**: [FabLabs Documentation](https://sainsburywellcomecentre.github.io/fablabs-documentation/#[your-repo])
