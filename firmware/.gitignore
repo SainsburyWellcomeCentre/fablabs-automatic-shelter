@@ -1,7 +1,9 @@
-.vscode
-build
-.micropico
-test.py
 
-# Python cache files
-__pycache__/
+
+# MicroPython firmware development
+.vscode/
+.micropico
+typings/
+lib/
+
+test.py

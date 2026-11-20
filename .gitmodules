@@ -1,3 +1,0 @@
-[submodule "firmware/microharp"]
-	path = firmware/microharp
-	url = https://github.com/SainsburyWellcomeCentre/micropython-microharp.git
