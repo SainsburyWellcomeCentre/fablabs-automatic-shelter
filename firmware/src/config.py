@@ -42,6 +42,7 @@ ADDR_POS_DOOR_2 = const(0x24)
 ADDR_POS_DOOR_3 = const(0x25)
 ADDR_POS_BLOCK_1 = const(0x26)
 ADDR_POS_BLOCK_2 = const(0x27)
+ADDR_POS_ARM = const(0x28)
 
 ADDR_STATUS_HOUSE_1 = const(0x30)
 ADDR_STATUS_HOUSE_2 = const(0x31)
@@ -51,6 +52,7 @@ ADDR_STATUS_DOOR_2 = const(0x34)
 ADDR_STATUS_DOOR_3 = const(0x35)
 ADDR_STATUS_BLOCK_1 = const(0x36)
 ADDR_STATUS_BLOCK_2 = const(0x37)
+ADDR_STATUS_ARM = const(0x38)
 
 ADDR_TRQ_HOUSE_1 = const(0x40)
 ADDR_TRQ_HOUSE_2 = const(0x41)
@@ -60,6 +62,7 @@ ADDR_TRQ_DOOR_2 = const(0x44)
 ADDR_TRQ_DOOR_3 = const(0x45)
 ADDR_TRQ_BLOCK_1 = const(0x46)
 ADDR_TRQ_BLOCK_2 = const(0x47)
+ADDR_TRQ_ARM = const(0x48)
 
 ADDR_SPD_HOUSE_1 = const(0x50)
 ADDR_SPD_HOUSE_2 = const(0x51)
@@ -69,7 +72,7 @@ ADDR_SPD_DOOR_2 = const(0x54)
 ADDR_SPD_DOOR_3 = const(0x55)
 ADDR_SPD_BLOCK_1 = const(0x56)
 ADDR_SPD_BLOCK_2 = const(0x57)
-
+ADDR_SPD_ARM = const(0x58)
 
 # ---- Harp device identity -------------------------------------------------
 WHO_AM_I = const(3300)

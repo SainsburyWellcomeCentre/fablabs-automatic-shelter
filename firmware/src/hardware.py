@@ -8,7 +8,7 @@ from dac5571 import VMControl
 from machine import Pin, UART, I2C
 
 import config as cfg
-from motor import House, Door, Block
+from motor import House, Door, Block, Arm
 
 user_led = Pin(cfg.PIN_USER_LED, Pin.OUT, value=1)  # starts off
 error_led = Pin(cfg.PIN_ERROR_LED, Pin.OUT, value=1)  # starts off
@@ -34,7 +34,7 @@ door_2 = Door(uart=servo_uart, motor_id=4, pos_offset=0)
 door_3 = Door(uart=servo_uart, motor_id=6, pos_offset=0)
 block_1 = Block(uart=servo_uart, motor_id=8, pos_offset=0)
 block_2 = Block(uart=servo_uart, motor_id=9, pos_offset=0)
-
+arm = Arm(uart=servo_uart, motor_id=10, pos_offset=0)
 
 def set_error_led(on):
     error_led.value(0 if on else 1)  # active-low

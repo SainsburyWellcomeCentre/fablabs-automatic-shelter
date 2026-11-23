@@ -1,7 +1,6 @@
 """Harp application registers for the shelter motors.
 
-On startup the motors are homed one at a time (see `attach`), keeping the
-peak supply current low.
+On startup all motors are homed concurrently (see `attach`).
 
 Each motor from `hardware` gets four registers, with the addresses taken
 from `config`:
@@ -26,7 +25,7 @@ from microharp.registers import OP_OP_MODE_ACTIVE, OP_OP_MODE_MASK, R_OPERATION_
 import asyncio
 
 import config as cfg
-from hardware import house_1, house_2, house_3, door_1, door_2, door_3, block_1, block_2
+from hardware import house_1, house_2, house_3, door_1, door_2, door_3, block_1, block_2, arm
 
 # One row per motor: (motor, position, status, torque, speed register, name).
 _MOTOR_MAP = (
@@ -38,6 +37,7 @@ _MOTOR_MAP = (
     (door_3, cfg.ADDR_POS_DOOR_3, cfg.ADDR_STATUS_DOOR_3, cfg.ADDR_TRQ_DOOR_3, cfg.ADDR_SPD_DOOR_3, "Door3"),
     (block_1, cfg.ADDR_POS_BLOCK_1, cfg.ADDR_STATUS_BLOCK_1, cfg.ADDR_TRQ_BLOCK_1, cfg.ADDR_SPD_BLOCK_1, "Block1"),
     (block_2, cfg.ADDR_POS_BLOCK_2, cfg.ADDR_STATUS_BLOCK_2, cfg.ADDR_TRQ_BLOCK_2, cfg.ADDR_SPD_BLOCK_2, "Block2"),
+    (arm, cfg.ADDR_POS_ARM, cfg.ADDR_STATUS_ARM, cfg.ADDR_TRQ_ARM, cfg.ADDR_SPD_ARM, "Arm"),
 )
 
 
@@ -55,19 +55,21 @@ def attach(device: HarpDevice):
     for motor, pos_addr, status_addr, trq_addr, spd_addr, name in _MOTOR_MAP:
         _attach_motor(device, active, motor, pos_addr, status_addr, trq_addr, spd_addr, name)
 
-    # Home the motors at startup, one at a time to limit the peak supply
-    # current.  Runs as a task once the event loop is up, so the device
-    # answers Harp requests while homing.  A failed servo just ends up in
-    # the ERROR state; the sequence moves on to the next motor.
+    # Home all motors concurrently once the event loop is up, so the device
+    # can answer Harp requests while homing.  A canceled calibration does
+    # not prevent the remaining motors from continuing.
 
-    @device.task
-    async def _calibrate_on_init():
-        for row in _MOTOR_MAP:
-            motor = row[0]
-            try:
-                await motor.calibrate()
-            except asyncio.CancelledError:
-                pass  # a host command replaced the calibration; move on
+        motor.start_calibration()
+
+    # @device.task
+    # async def _calibrate_on_init():
+    #     async def _calibrate(motor):
+    #         try:
+    #             await motor.start_calibration()
+    #         except asyncio.CancelledError:
+    #             pass  # a host command replaced this calibration
+
+    #     await asyncio.gather(*(_calibrate(row[0]) for row in _MOTOR_MAP))
 
 
 def _attach_motor(device, active, motor, pos_addr, status_addr, trq_addr, spd_addr, name):

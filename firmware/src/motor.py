@@ -257,8 +257,27 @@ class House(Motor):
 
 class Door(Motor):
     def __init__(self, uart: UART, motor_id: int, pos_offset: int):
-        super().__init__(uart, DynamixelModel.XM430_W350, motor_id, default_vel=100, default_trq=64, max_vel=200, max_trq=64, pos_offset=pos_offset, length=8720)
+        super().__init__(uart, DynamixelModel.XM430_W350, motor_id, default_vel=100, default_trq=80, max_vel=200, max_trq=100, pos_offset=pos_offset, length=8720)
 
 class Block(Motor):
     def __init__(self, uart: UART, motor_id: int, pos_offset: int):
-        super().__init__(uart, DynamixelModel.XM430_W210, motor_id, default_vel=40, default_trq=64, max_vel=100, max_trq=64, pos_offset=pos_offset, length=530)
+        super().__init__(uart, DynamixelModel.XM430_W210, motor_id, default_vel=40, default_trq=85, max_vel=100, max_trq=100, pos_offset=pos_offset, length=530)
+
+class Arm(Motor):
+    def __init__(self, uart: UART, motor_id: int, pos_offset: int):
+        super().__init__(uart, DynamixelModel.XM430_W210, motor_id, default_vel=7, default_trq=188, max_vel=20, max_trq=255, pos_offset=pos_offset, length=950)
+
+    @property
+    def torque(self):
+        return self.current_limit >> 2
+
+    @torque.setter
+    def torque(self, val):
+        val = max(0, min(val, self.max_trq))
+        val = val << 2
+        temp = self.torque_enabled
+        self.torque_enabled = False
+        self.current_limit = val
+        # Do not switch the motor on if the host disabled it.
+        self.torque_enabled = temp
+
