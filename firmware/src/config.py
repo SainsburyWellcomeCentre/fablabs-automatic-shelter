@@ -76,7 +76,7 @@ ADDR_SPD_ARM = const(0x58)
 
 # ---- Harp device identity -------------------------------------------------
 WHO_AM_I = const(3300)
-FW_VERSION = (0, 1)
-HW_VERSION = (2, 1)
+FW_VERSION = (1, 1)
+HW_VERSION = (2, 0)
 HARP_VERSION = (1, 13)
 DEVICE_NAME = b"Automatic Shelter"

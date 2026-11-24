@@ -1,122 +1,46 @@
-# [Project Name]
+# Automatic Shelter
 
-> **📝 Template Instructions:** Replace all bracketed placeholders `[like this]` with your project-specific information. Remove sections that don't apply to your project. Delete this instruction block when you're done.
+A Harp-controlled shelter actuator system for positioning three house sections, three doors, two blocks, and an arm.
 
-![GitHub release](https://img.shields.io/github/v/release/SainsburyWellcomeCentre/[your-repo].svg)
+## Actuators Registers
 
-[Brief one-line description of what your project does]
+| Actuator | Position | Status | Torque | Speed |
+| -------- | -------- | ------ | ------ | ----- |
+| House 1  | 0x20     | 0x30   | 0x40   | 0x50  |
+| House 2  | 0x21     | 0x31   | 0x41   | 0x51  |
+| House 3  | 0x22     | 0x32   | 0x42   | 0x52  |
+| Door 1   | 0x23     | 0x33   | 0x43   | 0x53  |
+| Door 2   | 0x24     | 0x34   | 0x44   | 0x54  |
+| Door 3   | 0x25     | 0x35   | 0x45   | 0x55  |
+| Block 1  | 0x26     | 0x36   | 0x46   | 0x56  |
+| Block 2  | 0x27     | 0x37   | 0x47   | 0x57  |
+| Arm      | 0x28     | 0x38   | 0x48   | 0x58  |
 
-> **Note:** [Any important warnings or notes about the project]
+For details on the register schema, see `device.yml`.
 
-<img src=".img/[main-image].png" alt="[Image Description]" width="800"/>
+## Firmware Development
 
-[Detailed description of the project, its purpose, and the problem it solves. Include context about why this project is useful and what applications it serves.]
+For information on setting up the development environment and flashing firmware onto the development board, please refer to [`Firmware Development`](firmware/README.md).
 
-## 🔧 Features
+## Bonsai Example
 
-- [Feature 1 - describe key functionality]
-- [Feature 2 - describe key functionality]
-- [Feature 3 - describe key functionality]
-- [Feature 4 - describe key functionality]
-- [Add/remove features as needed]
+Open `software/bonsai/shelter.bonsai` in Bonsai. The workflow provides keyboard controls for the actuators and communicates with the device using Harp messages.
 
-## 🌐 View Online (eCAD)
+Review the selected COM port and target device settings before opening the workflow. Start in a low-torque configuration and test one actuator at a time.
 
-View the complete electronic design project online via [Altium 365 Viewer](https://sainsburywellcomecentre.github.io/fablabs-documentation/#[your-repo])
+## License
 
-## 🚀 Getting Started
+See [`LICENSE`](LICENSE) for the licenses applying to this project.
 
-[Provide step-by-step instructions for initial setup and basic usage]
+## Contributing
 
-1. [First step - setup/installation]
-2. [Second step - configuration]
-3. [Third step - basic operation]
+1. Fork the repository.
+2. Create a focused branch for your change.
+3. Update the corresponding firmware constants and `device.yml` schema when register behavior changes.
+4. Test on the target hardware before opening a pull request.
 
-<img src=".img/[usage-image].png" alt="[Usage Description]" width="300"/>
+## Contact
 
-[Additional usage instructions, tips, or references to external resources]
-
-[If applicable, mention any measurement tools or validation methods]
-
-## ⚙️ Configuration & Tuning _(if applicable)_
-
-[If your project requires calibration or fine-tuning, describe the process here]
-
-## 🔧 [Configuration/Calibration] Guidelines
-
-- [Step 1 - describe calibration procedure]
-- [Step 2 - describe parameter adjustment]
-- [Operating ranges and recommended settings]
-  > [Important notes or warnings about configuration]
-
-<div align="center">
-  <img src=".img/[configuration-image].png" alt="[Configuration Description]" width="600"/>
-</div>
-
-## 💻 Software Requirements
-
-To access the source design files:
-
-- **[eCAD Software] [Version]** or newer _(for electronic design files)_  
-  Academic licenses available via [[Software] Education]([link])
-- **[mCAD Software] [Version]** or newer _(for mechanical design files)_  
-  Academic licenses via [[Software] Education]([link])
-- **[Additional Software]** _(if applicable for firmware/programming)_
-
-## 📜 License
-
-**Sainsbury Wellcome Centre hardware is released under** [Creative Commons Attribution-ShareAlike 4.0 International](http://creativecommons.org/licenses/by-sa/4.0/).
-
-You are free to:
-
-- **Share** — copy and redistribute the material in any medium or format
-- **Adapt** — remix, transform, and build upon the material for any purpose
-
-Under the following terms:
-
-- **Attribution** — Give appropriate credit, link to the license, and indicate changes.
-- **ShareAlike** — Distribute your contributions under the same license.
-- **No additional restrictions** — Don’t apply legal or technological measures that prevent others from doing anything the license permits.
-
-> For the full legal text, see [LICENSE](LICENSE).
-
-## 📚 References _(if applicable)_
-
-[If your project is based on or references academic work, list citations here]
-
-```bibtex
-@ARTICLE{AuthorYear,
-  title     = "[Paper Title]",
-  author    = "[Author Names]",
-  journal   = "[Journal Name]",
-  volume    = "[Volume]",
-  number    = "[Number]",
-  pages     = "[Pages]",
-  year      = "[Year]",
-  url       = "[URL]",
-  doi       = "[DOI]"
-}
-```
-
-## 🤝 Contributing
-
-[If you want to accept contributions, add guidelines here]
-
-1. Fork the repository
-2. Create a feature branch
-3. Make your changes
-4. Submit a pull request
-
-## ❤ Contributors
-
- <a href = "https://github.com/sainsburywellcomecentre/[your-repo]/graphs/contributors">
-   <img src = "https://contrib.rocks/image?repo=sainsburywellcomecentre/[your-repo]" alt="Contributors"/>
- </a>
-
-## 📧 Contact
-
-[Contact information or support channels]
-
-- **Author**: [Sainsbury Wellcome Centre FabLabs](https://www.sainsburywellcome.org/content/fablab)
-- **Email**: [swc.fablabs@ucl.ac.uk](mailto:swc.fablabs@ucl.ac.uk)
-- **Website**: [FabLabs Documentation](https://sainsburywellcomecentre.github.io/fablabs-documentation/#[your-repo])
+- **Author:** Sainsbury Wellcome Centre FabLabs
+- **Email:** [swc.fablabs@ucl.ac.uk](mailto:swc.fablabs@ucl.ac.uk)
+- **Website:** [FabLabs Documentation](https://www.sainsburywellcomecentre.org/content/fablab)
